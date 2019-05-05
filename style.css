@@ -1,0 +1,70 @@
+body {
+    font-family: 'Luckiest Guy';
+    font-size: 20px;
+}
+ h1 {
+     font-family: Oswald, serif; 
+     text-align: center;
+     margin-bottom: 2em; 
+ }
+
+#game-board {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    left: 50%;
+    margin-left: -150px;
+    
+}
+.game-square {
+    height: 5em; 
+    width: 5em; 
+    background-color: silver; 
+    
+
+}
+
+.column1 {
+    border-right: 5px #696969 solid;  
+}
+
+.column3 {
+    border-left: 5px #696969 solid;  
+}
+
+.row1 {
+    border-bottom:  5px #696969 solid; 
+}
+
+.row3 {
+    border-top:  5px #696969 solid; 
+}
+
+#topRow {
+    border-radius: 10px 10px 0 0; 
+    display: flex; 
+    flex-direction: row; 
+}
+#midRow {
+    display: flex; 
+    flex-direction: row; 
+}
+#botRow {
+    border-radius: 0 0 10px 10px; 
+    display: flex; 
+    flex-direction: row; 
+}
+
+#sq1 {
+    border-radius: 10px 0 0 0; 
+    color: red; 
+}
+#sq3 {
+    border-radius: 0 10px 0 0; 
+}
+#sq7 {
+    border-radius: 0 0 0 10px; 
+}
+#sq9{
+    border-radius: 0 0 10px 0; 
+}
