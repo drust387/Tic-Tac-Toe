@@ -17,22 +17,26 @@ body {
     
 }
 .game-square {
-    height: 5em; 
-    width: 5em; 
+    height: 100px; 
+    width: 100px;
     background-color: silver; 
+    text-align:center; 
+    color: white;
+    font-size: 2em; 
 }
 
 .played-x-square {
-    background-color: #FDBa21;
-    border: 7px solid #006bb6 ; 
+    height: 100px; 
+    width: 100px;
+    background-color: #20639B; 
+    text-align:center; 
+    color: white;
     font-size: 2em; 
-    text-align: center; 
-    color: #006bb6;
 }
+
 
 .played-o-square {
     background-color: #69Be28;
-    border: 7px solid #002244 ; 
     font-size: 2em; 
     text-align: center; 
     color: #002244;
@@ -71,7 +75,6 @@ body {
 
 #sq1 {
     border-radius: 10px 0 0 0; 
-    color: red; 
 }
 #sq3 {
     border-radius: 0 10px 0 0; 
