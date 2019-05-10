@@ -1,3 +1,4 @@
+console.log('cool');
 let sq1 = document.getElementById('sq1');
 let sq2 = document.getElementById('sq2');
 let sq3 = document.getElementById('sq3');
@@ -8,23 +9,10 @@ let sq7 = document.getElementById('sq7');
 let sq8 = document.getElementById('sq8');
 let sq9 = document.getElementById('sq9');
 
-let gameboard = [sq1,sq2,sq3,sq4,sq5,sq6,sq7,sq8,s89];
+let gameboard = [sq1,sq2,sq3,sq4,sq5,sq6,sq7,sq8,sq9];
 let winCombos = [[sq1,sq2,sq3],[sq4,sq5,sq6],[sq7,sq8,sq9],[sq1,sq4,sq7],[sq2,sq5,sq8],[sq3,sq6,sq9],[sq1,sq5,sq9],[sq7,sq5,sq3]];
 
 let movecount = 0; 
-
-$(document).ready(() => {
-
-    $('#sq1').on('hover', () => {
-        $('#sq1').css('background-color', '#8A8987');      
-      })
-
-  $('.game-square').on('click', event => {
-    $(event.currentTarget).innerHTML = 'X';
-    $(event.currentTarget).addClass('played-x-square');        
-  })
-
-}) //jquery^^
 
 
 let compPlay = () => {
@@ -70,3 +58,21 @@ let compPlay = () => {
 let uniqueCompPlay = () => {
     return gameboard[Math.floor(Math.random() * gameboard.length)]
 } 
+
+$(document).ready(() => {
+
+    $(".game-square").hover(function(){
+        $(this).css("background-color", "#3D4849");
+        }, function(){
+        $(this).css("background-color", "silver");
+      });
+
+  $('.game-square').on('click', event => {
+    $(event.currentTarget).removeClass('game-square');
+    $(event.currentTarget).addClass('played-x-square');
+    $(event.currentTarget).append('X');       
+  });
+
+}) //jquery^^
+
+console.log('cool');
