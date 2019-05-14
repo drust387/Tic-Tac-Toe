@@ -21,17 +21,18 @@ body {
     width: 100px;
     background-color: silver; 
     text-align:center; 
-    color: white;
-    font-size: 2em; 
+    vertical-align: middle;
+    font-size: 1.5em; 
+    color: white; 
 }
 
 .played-x-square {
     height: 100px; 
     width: 100px;
     background-color: #20639B; 
-    text-align:center; 
+    text-align: center; 
     color: white;
-    font-size: 2em; 
+    font-size: 4em; 
 }
 
 
