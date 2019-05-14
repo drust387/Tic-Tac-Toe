@@ -1,4 +1,3 @@
-console.log('cool');
 let sq1 = document.getElementById('sq1');
 let sq2 = document.getElementById('sq2');
 let sq3 = document.getElementById('sq3');
@@ -16,6 +15,7 @@ let movecount = 0;
 
 
 let compPlay = () => {
+    console.log('started');
     gameboard.forEach(square => {
             if (square.innerHTML === true) {
                 gameboard.splice(gameboard.indexOf(square),1) 
@@ -23,31 +23,35 @@ let compPlay = () => {
         })
     
     if(movecount === 1) {
-        if(sq5.innerHTML === true) {
-            //sq7
-        } else if(sq5.innerHTML === false) {
-            //select center square
+        if(sq5.innerHTML === 'X') {
+            compMoveViewable(sq7);
+        } else if(sq5.innerHTML === '') {
+            compMoveViewable(sq5);
         }
 
     }else if(movecount > 1) {
-        
-        for (i=0; i > winCombos.length; i++) {
+        console.log("I'm in here working");
+        for (i=0; i < winCombos.length; i++) {
+            console.log("I'm in the loop!")
             let xCount = 0; 
             let oCount = 0;  
             let totCount = 0; 
                 winCombos[i].forEach(value => {
-                    if(value === 'X') {
+                    console.log(value);
+                    if(value.innerHTML === 'X') {
                     xCount += 1; 
                     totCount +=1; 
-                    }else if (value ==='O') {
+                    console.log(oCount);
+                    }else if (value.innerHTML ==='O') {
                     oCount += 1; 
                     totCount +=1; 
+                    console.log(xCount);
                     } else if (xCount === 2 || oCount === 2 && totCount < 3) {
-                        if (value !== 'X' && value !== 'O') {
-                            return value; //this is the spot that should be played. 
+                        if (value.innerHTML !== 'X' && value.innerHTML !== 'O') {
+                            compMoveViewable(value);        
                         } else {
-                            return uniqueCompPlay();
-                            // call function that picks one a remaining square. Play the result. 
+                            let nextMoveTwo = uniqueCompPlay();
+                            compMoveViewable(nextMoveTwo);
                         }
                     }
             })
@@ -59,20 +63,42 @@ let uniqueCompPlay = () => {
     return gameboard[Math.floor(Math.random() * gameboard.length)]
 } 
 
+let compMoveViewable = (square) => {
+    square.innerHTML = 'O';
+    square.style.backgroundColor = "#69Be28";
+    square.style.color = "white";
+    square.style.textAlign = "center";
+    square.style.fontSize = "4.5em";
+}
+//jquery
+
 $(document).ready(() => {
+ 
+    
+      $('.game-square').on('mouseenter', event => {
+        $(event.currentTarget).append('Pick Me!');
+        $(event.currentTarget).css('background-color', '#3D4849')
+        $(event.currentTarget).animate({
+          fontSize: '1.9em'
+        }, 100)
+      })
+      
+      $('.game-square').on('mouseleave', event => {
+        $(event.currentTarget).css("background-color", "silver");
+        $(event.currentTarget).html("")
+       
+        })
 
-    $(".game-square").hover(function(){
-        $(this).css("background-color", "#3D4849");
-        }, function(){
-        $(this).css("background-color", "silver");
-      });
-
-  $('.game-square').on('click', event => {
-    $(event.currentTarget).removeClass('game-square');
-    $(event.currentTarget).addClass('played-x-square');
-    $(event.currentTarget).append('X');       
-  });
+      $('.play-square').on('click', event => {
+        $(event.currentTarget).unbind("mouseenter mouseleave");
+        $(event.currentTarget).html("").append('X'); 
+        $(event.currentTarget).removeClass('game-square');
+        $(event.currentTarget).addClass('played-x-square').css({"background-color": "#20639B", "text-align": "center", "font-size": '4em'});
+        movecount += 1; 
+        console.log(movecount); 
+        compPlay();    
+        });
+    
 
 }) //jquery^^
 
-console.log('cool');
