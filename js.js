@@ -17,11 +17,10 @@ let movecount = 0;
 
 let compPlay = () => {
     gameboard.forEach(square => {
-                console.log('here I am');
+            
             if (square.innerHTML === 'X' || square.innerHTML === 'O') {
                 gameboard.splice(gameboard.indexOf(square),1) 
-                console.log(gameboard);
-                console.log('here I am 2');
+                
             }
         })
         let winCombos = [[sq1,sq2,sq3],[sq4,sq5,sq6],[sq7,sq8,sq9],[sq1,sq4,sq7],[sq2,sq5,sq8],[sq3,sq6,sq9],[sq1,sq5,sq9],[sq7,sq5,sq3]];
@@ -34,6 +33,7 @@ let compPlay = () => {
 
     }else if(movecount > 1) {
         for (i=0; i < winCombos.length; i++) {
+            console.log('i =' + i);
             let xCount = 0; 
             let oCount = 0;  
             let totCount = 0; 
@@ -49,10 +49,10 @@ let compPlay = () => {
                     } else if (value.innerHTML === '') {
                         if (xCount === 2 && totCount < 3) {
                             compMoveViewable(value); 
-                            break;       
+                              
                         } else if (oCount === 2 && totCount < 3) {
                             compMoveViewable(value);
-                            break; 
+                            
                                 }else {
                                     let nextMoveTwo = uniqueCompPlay();
                                     compMoveViewable(nextMoveTwo);
@@ -65,7 +65,12 @@ let compPlay = () => {
 }
 
 let uniqueCompPlay = () => {
-    return gameboard[Math.floor(Math.random() * gameboard.length - 1)]
+    let randomSquare = gameboard[Math.floor(Math.random() * gameboard.length - 1)];
+     if (randomSquare.innerHTML === '') {
+         return randomSquare
+     } else {
+         uniqueCompPlay();
+     }
 } 
 
 let compMoveViewable = (square) => {
@@ -100,7 +105,7 @@ $(document).ready(() => {
         $(event.currentTarget).removeClass('game-square');
         $(event.currentTarget).addClass('played-x-square').css({"background-color": "#20639B", "text-align": "center", "font-size": '4em'});
         movecount += 1; 
-        console.log(movecount); 
+        console.log('movecount =' + movecount); 
         compPlay();    
         });
     
