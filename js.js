@@ -23,49 +23,73 @@ let compPlay = () => {
                 
             }
         })
-        let winCombos = [[sq1,sq2,sq3],[sq4,sq5,sq6],[sq7,sq8,sq9],[sq1,sq4,sq7],[sq2,sq5,sq8],[sq3,sq6,sq9],[sq1,sq5,sq9],[sq7,sq5,sq3]];
-    if(movecount === 1) {
-        if(sq5.innerHTML === 'X') {
-            compMoveViewable(sq7);
-        } else if(sq5.innerHTML === '') {
-            compMoveViewable(sq5);
-        }
+        
+            if(movecount === 1) {
+                if(sq5.innerHTML === 'X') {
+                 compMoveViewable(sq7);
+                 console.log('Center was played so Im playing square 7');
+                } else {
+                compMoveViewable(sq5);
+                console.log('Center wasnt played, so Im taking the obvious choice');
+                }
 
-    }else if(movecount > 1) {
-        for (i=0; i < winCombos.length; i++) {
-            console.log('i =' + i);
-            let xCount = 0; 
-            let oCount = 0;  
-            let totCount = 0; 
-                winCombos[i].forEach(value => {
-                    if(value.innerHTML === 'X') {
-                    xCount +=1; 
-                    totCount +=1; 
+            }else {
+                console.log('The movecount is higher than 1 so iterate through win combs to find best spot');
+                for (i=0; i < winCombos.length; i++) {
+                 console.log('i =' + i);
+                 let xCount = 0; 
+                 let oCount = 0;  
+                 let totCount = 0; 
+                    winCombos[i].forEach(value => {
+                        console.log(value);
+                        if(value.innerHTML === 'X') {
+                             xCount +=1; 
+                             totCount +=1; 
+                             console.log('xCount =' + xCount);
+                             console.log('totCount =' + totCount);
+                             console.log(value);
+                             console.log(value.id);
+                             
+
                     
-                    }else if (value.innerHTML ==='O') {
-                    oCount += 1; 
-                    totCount +=1; 
+                         } else if (value.innerHTML ==='O') {
+                             oCount += 1; 
+                             totCount +=1;
+                             console.log('oCount =' + oCount);
+                             console.log('totCount =' + totCount); 
+                             console.log(value);
+                             console.log(value.id);
                     
-                    } else if (value.innerHTML === '') {
-                        if (xCount === 2 && totCount < 3) {
+                         } else if (value.innerHTML === '' && xCount === 2 && totCount < 3) {
+                            console.log('Im playing defense');
                             compMoveViewable(value); 
+                            i += 10;
+                            console.log('new i =' + i);
                               
-                        } else if (oCount === 2 && totCount < 3) {
+                         } else if (value.innerHTML === '' && oCount === 2 && totCount < 3) {
+                            console.log('Im trying to win the game');
                             compMoveViewable(value);
+                            i += 10;
+                            console.log('new i =' + i);
                             
-                                }else {
-                                    let nextMoveTwo = uniqueCompPlay();
-                                    compMoveViewable(nextMoveTwo);
+                         } else {
+                             let nextMoveTwo = uniqueCompPlay();
+                             console.log('Nothing here seems obvious, so im taking random spot');
+                            compMoveViewable(nextMoveTwo);
+                            i += 10;
+                            
+                            console.log('new i =' + i);
+                            
                                     
-                        }
                     }
-            })
+                })
+            }
         }
-    }
+    
 }
 
 let uniqueCompPlay = () => {
-    let randomSquare = gameboard[Math.floor(Math.random() * gameboard.length - 1)];
+    let randomSquare = gameboard[Math.floor(Math.random() * gameboard.length)];
      if (randomSquare.innerHTML === '') {
          return randomSquare
      } else {
@@ -79,6 +103,8 @@ let compMoveViewable = (square) => {
     square.style.color = "white";
     square.style.textAlign = "center";
     square.style.fontSize = "4.5em";
+    movecount += 1;
+    console.log(movecount);
 }
 //jquery
 
